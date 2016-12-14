@@ -11,12 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.JTextField;
 
 public class Main {
 	
 	static char topleftV, topmidV, toprightV, midleftV, midmidV, midrightV, botleftV, botmidV, botrightV; //V for value :D
 	static int currentPlayer = 1;
+	boolean hasWinner;
 
 	private JFrame frame;
 
@@ -48,11 +48,14 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setLayout(new GridLayout(2,2));
 		frame.setBounds(100, 100, 575, 525);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("Tic Tac Toe - Menu");
 		
 		JLabel playerOption = new JLabel("How many players?");
+		JLabel currentTurn;
 		playerOption.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		playerOption.setBounds(129, 0, 174, 79);
 		frame.getContentPane().add(playerOption);
@@ -67,6 +70,7 @@ public class Main {
 				frame.getContentPane().remove(btn2Players);
 				frame.revalidate();
 				frame.repaint();
+				frame.setTitle("Tic Tac Toe - 2 Player Game");
 				
 				currentPlayer = 1;
 				JButton topleft = new JButton("");
@@ -75,16 +79,57 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							topleftV = 'X';
 						} else if (currentPlayer == 2 && topleftV != 'X') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
 						}
 						
 						
@@ -101,16 +146,57 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topmid.setText("X");
-							topmid.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							topmidV = 'X';
 						} else if (currentPlayer == 2 && topmidV != 'X') {
 							topmid.setText("O");
-							topmid.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{	
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
 						}
 						
 						
@@ -125,16 +211,57 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topright.setText("X");
-							topright.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							toprightV = 'X';
 						} else if (currentPlayer == 2 && toprightV != 'X') {
 							topright.setText("O");
-							topright.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
 						}
 						
 						
@@ -149,16 +276,57 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							midright.setText("X");
-							midright.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							midright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							midrightV = 'X';
 						} else if (currentPlayer == 2 && midrightV != 'X') {
 							midright.setText("O");
-							midright.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							midright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
 						}
 						
 						
@@ -173,16 +341,57 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							midmid.setText("X");
-							midmid.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							midmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							midmidV = 'X';
 						} else if (currentPlayer == 2 && midmidV != 'X') {
 							midmid.setText("O");
-							midmid.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							midmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
 						}
 						
 						
@@ -197,16 +406,57 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							midleft.setText("X");
-							midleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							midleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							topleftV = 'X';
 						} else if (currentPlayer == 2 && midleftV != 'X') {
 							midleft.setText("O");
-							midleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							midleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
 						}
 						
 						
@@ -221,16 +471,57 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							botleft.setText("X");
-							botleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							botleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botleftV = 'X';
 						} else if (currentPlayer == 2 && botleftV != 'X') {
 							botleft.setText("O");
-							botleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							botleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
 						}
 						
 						
@@ -245,16 +536,58 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							botmid.setText("X");
-							botmid.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							botmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botmidV = 'X';
 						} else if (currentPlayer == 2 && botmidV != 'X') {
 							botmid.setText("O");
-							botmid.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							botmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+							
 						}
 						
 						
@@ -269,16 +602,58 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							botright.setText("X");
-							botright.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							botright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botrightV = 'X';
 						} else if (currentPlayer == 2 && botrightV != 'X') {
 							botright.setText("O");
-							botright.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							botright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+						}
+						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+						{
+							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
+							
+						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+						{
+							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
+							frame.repaint();
+							frame.revalidate();
+							initialize();
 						}
 						
 						
@@ -313,13 +688,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							topleftV = 'o';
 						} else if (currentPlayer == 2 && topleftV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -333,6 +708,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -343,6 +725,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
@@ -357,13 +746,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							topmidV = 'o';
 						} else if (currentPlayer == 2 && topmidV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -377,6 +766,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -387,6 +783,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
@@ -401,13 +804,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							toprightV = 'o';
 						} else if (currentPlayer == 2 && toprightV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -421,6 +824,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -431,6 +841,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
@@ -445,13 +862,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							midrightV = 'o';
 						} else if (currentPlayer == 2 && midrightV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -465,6 +882,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -475,6 +899,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
@@ -489,13 +920,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							midmidV = 'o';
 						} else if (currentPlayer == 2 && midmidV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -509,6 +940,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -519,6 +957,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
@@ -533,13 +978,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							midleftV = 'o';
 						} else if (currentPlayer == 2 && midleftV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -553,6 +998,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -563,6 +1015,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
@@ -577,13 +1036,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botleftV = 'o';
 						} else if (currentPlayer == 2 && botleftV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -597,6 +1056,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -607,6 +1073,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
@@ -621,13 +1094,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botmidV = 'o';
 						} else if (currentPlayer == 2 && botmidV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -641,6 +1114,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -651,6 +1131,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
@@ -665,13 +1152,13 @@ public class Main {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
 							topleft.setText("X");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botrightV = 'o';
 						} else if (currentPlayer == 2 && botrightV != 'o') {
 							topleft.setText("O");
-							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 50));
+							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 						}
@@ -685,6 +1172,13 @@ public class Main {
 								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
 						{
 							JOptionPane.showMessageDialog(null,"Player X has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -695,6 +1189,13 @@ public class Main {
 								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
 						{
 							JOptionPane.showMessageDialog(null, "Player O has won!");
+							hasWinner = true;
+							try {
+								Thread.sleep(3000);
+							} catch(InterruptedException ex) {
+								Thread.currentThread().interrupt();
+							}						
+							frame.removeAll();
 						}
 						
 						
