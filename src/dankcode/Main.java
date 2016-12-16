@@ -1,5 +1,6 @@
 package dankcode;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,10 +14,11 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 
 public class Main {
-	
+
 	static char topleftV, topmidV, toprightV, midleftV, midmidV, midrightV, botleftV, botmidV, botrightV; //V for value :D
 	static int currentPlayer = 1;
 	boolean hasWinner;
+	int turnCount = 0;
 
 	private JFrame frame;
 
@@ -53,14 +55,13 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("Tic Tac Toe - Menu");
-		
+
 		JLabel playerOption = new JLabel("How many players?");
-		JLabel currentTurn;
 		playerOption.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		playerOption.setBounds(129, 0, 174, 79);
 		frame.getContentPane().add(playerOption);
 		JButton btn1Player = new JButton("1 Player");
-		
+
 		JButton btn2Players = new JButton("2 Players");
 		btn2Players.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -71,92 +72,107 @@ public class Main {
 				frame.revalidate();
 				frame.repaint();
 				frame.setTitle("Tic Tac Toe - 2 Player Game");
-				
+
 				currentPlayer = 1;
 				JButton topleft = new JButton("");
 				topleft.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && topleftV == '\u0000') {
 							currentPlayer = 2;
 							topleft.setText("X");
 							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							topleftV = 'X';
-						} else if (currentPlayer == 2 && topleftV != 'X') {
+							topleft.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && topleftV == '\u0000') {
 							topleft.setText("O");
 							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							topleftV = 'O';
+							topleft.setForeground(Color.red);
+							turnCount++;
 						}
-						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
-								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
-								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
-								|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
-								|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
-								|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
-								|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
-								|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
-						{
-							JOptionPane.showMessageDialog(null,"Player X has won!");
-							hasWinner = true;
-							try {
-								Thread.sleep(3000);
-							} catch(InterruptedException ex) {
-								Thread.currentThread().interrupt();
-							}						
-							frame.removeAll();
-							frame.repaint();
-							frame.revalidate();
-							initialize();
-						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
-								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
-								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
-								|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
-								|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
-								|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
-								|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
-								|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
-						{
-							JOptionPane.showMessageDialog(null, "Player O has won!");
-							hasWinner = true;
-							try {
-								Thread.sleep(3000);
-							} catch(InterruptedException ex) {
-								Thread.currentThread().interrupt();
-							}						
-							frame.removeAll();
-							frame.repaint();
-							frame.revalidate();
-							initialize();
+						if (turnCount >= 5) {
+							if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
+									|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
+									|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
+									|| topleftV == 'X' && midleftV == 'X' && botleftV == 'X'
+									|| topmidV == 'X' && midmidV == 'X' && botmidV == 'X'
+									|| toprightV == 'X' && midrightV == 'X' && botrightV == 'X'
+									|| toprightV == 'X' && midmidV == 'X' && botleftV == 'X'
+									|| topleftV == 'X' && midmidV == 'X' && botrightV == 'X')
+							{
+								JOptionPane.showMessageDialog(null,"Player X has won!");
+								hasWinner = true;
+								try {
+									Thread.sleep(3000);
+								} catch(InterruptedException ex) {
+									Thread.currentThread().interrupt();
+								}						
+								frame.removeAll();
+								frame.repaint();
+								frame.revalidate();
+								initialize();
+							} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
+									|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
+									|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
+									|| topleftV == 'O' && midleftV == 'O' && botleftV == 'O'
+									|| topmidV == 'O' && midmidV == 'O' && botmidV == 'O'
+									|| toprightV == 'O' && midrightV == 'O' && botrightV == 'O'
+									|| toprightV == 'O' && midmidV == 'O' && botleftV == 'O'
+									|| topleftV == 'O' && midmidV == 'O' && botrightV == 'O')
+							{
+								JOptionPane.showMessageDialog(null, "Player O has won!");
+								hasWinner = true;
+								try {
+									Thread.sleep(3000);
+								} catch(InterruptedException ex) {
+									Thread.currentThread().interrupt();
+								}						
+								frame.removeAll();
+								frame.repaint();
+								frame.revalidate();
+								initialize();
+							} else if (turnCount == 9 && hasWinner == false) {
+								JOptionPane.showMessageDialog(null, "You tied!");
+							}
+
+
 						}
-						
-						
 					}
 				});
 				topleft.setBounds(77, 32, 140, 140);
 				frame.getContentPane().add(topleft);
-				
+
 				JButton topmid = new JButton("");
 				topmid.setBounds(227, 32, 140, 140);
 				frame.getContentPane().add(topmid);
 				topmid.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && topmidV =='\u0000') {
 							currentPlayer = 2;
 							topmid.setText("X");
 							topmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							topmidV = 'X';
-						} else if (currentPlayer == 2 && topmidV != 'X') {
+							topmid.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && topmidV == '\u0000') {
 							topmid.setText("O");
 							topmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							topmidV = 'O';
+							topmid.setForeground(Color.red);
+							turnCount++;
 						}
+						if (turnCount >= 5) {
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
 								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
@@ -197,31 +213,40 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
+						} else if (turnCount == 9 && hasWinner == false) {
+							JOptionPane.showMessageDialog(null, "You tied!");
 						}
-						
-						
+
+
+					}
 					}
 				});
-				
+
 				JButton topright = new JButton("");
 				topright.setBounds(377, 33, 140, 140);
 				frame.getContentPane().add(topright);
 				topright.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && toprightV =='\u0000') {
 							currentPlayer = 2;
 							topright.setText("X");
 							topright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							toprightV = 'X';
-						} else if (currentPlayer == 2 && toprightV != 'X') {
+							topright.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && toprightV == '\u0000') {
 							topright.setText("O");
 							topright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							toprightV = 'O';
+							topright.setForeground(Color.red);
+							turnCount++;
 						}
+						if (turnCount >= 5) {
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
 								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
@@ -262,31 +287,39 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
+						} else if (turnCount == 9 && hasWinner == false) {
+							JOptionPane.showMessageDialog(null, "You tied!");
 						}
-						
-						
+
+						}
 					}
 				});
-				
-				JButton midright = new JButton("");
-				midright.setBounds(377, 184, 140, 140);
-				frame.getContentPane().add(midright);
-				midright.addActionListener(new ActionListener() {
+
+				JButton midleft = new JButton("");
+				midleft.setBounds(77, 184, 140, 140);
+				frame.getContentPane().add(midleft);
+				midleft.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && midleftV == '\u0000') {
 							currentPlayer = 2;
-							midright.setText("X");
-							midright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
+							midleft.setText("X");
+							midleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
-							midrightV = 'X';
-						} else if (currentPlayer == 2 && midrightV != 'X') {
-							midright.setText("O");
-							midright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
+							midleftV = 'X';
+							midleft.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && midleftV == '\u0000') {
+							midleft.setText("O");
+							midleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							midleftV = 'O';
+							midleft.setForeground(Color.red);
+							turnCount++;
 						}
+						if (turnCount >= 5) {
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
 								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
@@ -327,31 +360,39 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
+						} else if (turnCount == 9 && hasWinner == false) {
+							JOptionPane.showMessageDialog(null, "You tied!");
 						}
-						
-						
+						}
+
 					}
 				});
-				
-                JButton midmid = new JButton("");
-		        midmid.setBounds(227, 184, 140, 140);
+
+				JButton midmid = new JButton("");
+				midmid.setBounds(227, 184, 140, 140);
 				frame.getContentPane().add(midmid);
 				midmid.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && midmidV == '\u0000') {
 							currentPlayer = 2;
 							midmid.setText("X");
 							midmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							midmidV = 'X';
-						} else if (currentPlayer == 2 && midmidV != 'X') {
+							midmid.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && midmidV == '\u0000') {
 							midmid.setText("O");
 							midmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							midmidV = 'O';
+							midmid.setForeground(Color.red);
+							turnCount++;
 						}
+						if (turnCount >= 5) {
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
 								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
@@ -392,31 +433,39 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
+						} else if (turnCount == 9 && hasWinner == false) {
+							JOptionPane.showMessageDialog(null, "You tied!");
 						}
-						
-						
+						}
+
 					}
 				});
-				
-				JButton midleft = new JButton("");
-				midleft.setBounds(77, 184, 140, 140);
-				frame.getContentPane().add(midleft);
-				midleft.addActionListener(new ActionListener() {
+
+				JButton midright = new JButton("");
+				midright.setBounds(377, 184, 140, 140);
+				frame.getContentPane().add(midright);
+				midright.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && midrightV == '\u0000') {
 							currentPlayer = 2;
-							midleft.setText("X");
-							midleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
+							midright.setText("X");
+							midright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
-							topleftV = 'X';
-						} else if (currentPlayer == 2 && midleftV != 'X') {
-							midleft.setText("O");
-							midleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
+							midrightV = 'X';
+							midright.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && midrightV == '\u0000') {
+							midright.setText("O");
+							midright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							midrightV = 'O';
+							midright.setForeground(Color.red);
+							turnCount++;
 						}
+						if (turnCount >= 5) {
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
 								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
@@ -457,31 +506,39 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
+						} else if (turnCount == 9 && hasWinner == false) {
+							JOptionPane.showMessageDialog(null, "You tied!");
 						}
-						
-						
+						}
+
 					}
 				});
-				
-     			JButton botleft = new JButton("");
+
+				JButton botleft = new JButton("");
 				botleft.setBounds(77, 335, 140, 140);
 				frame.getContentPane().add(botleft);
 				botleft.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && botleftV == '\u0000') {
 							currentPlayer = 2;
 							botleft.setText("X");
 							botleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botleftV = 'X';
-						} else if (currentPlayer == 2 && botleftV != 'X') {
+							botleft.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && botleftV == '\u0000') {
 							botleft.setText("O");
 							botleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							botleftV = 'O';
+							botleft.setForeground(Color.red);
+							turnCount++;
 						}
+						if (turnCount >= 5) {
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
 								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
@@ -522,31 +579,39 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
+						} else if (turnCount == 9 && hasWinner == false) {
+							JOptionPane.showMessageDialog(null, "You tied!");
 						}
-						
-						
+
+						}
 					}
 				});
-				
+
 				JButton botmid = new JButton("");
 				botmid.setBounds(227, 335, 140, 140);
 				frame.getContentPane().add(botmid);
 				botmid.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && botmidV == '\u0000') {
 							currentPlayer = 2;
 							botmid.setText("X");
 							botmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botmidV = 'X';
-						} else if (currentPlayer == 2 && botmidV != 'X') {
+							botmid.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && botmidV == '\u0000') {
 							botmid.setText("O");
 							botmid.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							botmidV = 'O';
+							botmid.setForeground(Color.red);
+							turnCount++;
 						}
+						if (turnCount >= 5) {
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
 								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
@@ -587,32 +652,40 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
-							
+
+						} else if (turnCount == 9 && hasWinner == false) {
+							JOptionPane.showMessageDialog(null, "You tied!");
 						}
-						
-						
+
+						}
 					}
 				});
-				
+
 				JButton botright = new JButton("");
-                botright.setBounds(377, 335, 140, 140);
+				botright.setBounds(377, 335, 140, 140);
 				frame.getContentPane().add(botright);
 				botright.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (currentPlayer == 1) {
+						if (currentPlayer == 1 && botrightV == '\u0000') {
 							currentPlayer = 2;
 							botright.setText("X");
 							botright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							botrightV = 'X';
-						} else if (currentPlayer == 2 && botrightV != 'X') {
+							botright.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && botrightV == '\u0000') {
 							botright.setText("O");
 							botright.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
 							currentPlayer = 1;
+							botrightV = 'O';
+							botright.setForeground(Color.red);
+							turnCount++;
 						}
+						if (turnCount >= 5) {
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
 								|| botleftV == 'X' && botmidV == 'X' && botrightV == 'X' 
@@ -633,7 +706,7 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
-							
+
 						} else if (topleftV == 'O' && topmidV == 'O' && toprightV == 'O' 
 								|| midleftV == 'O' && midmidV == 'O' &&  midrightV == 'O' 
 								|| botleftV == 'O' && botmidV == 'O' && botrightV == 'O' 
@@ -654,16 +727,18 @@ public class Main {
 							frame.repaint();
 							frame.revalidate();
 							initialize();
+						} else if (turnCount == 9 && hasWinner == false) {
+							JOptionPane.showMessageDialog(null, "You tied!");
 						}
-						
-						
+
+						}
 					}
 				});
 			}
 		});
 		btn2Players.setBounds(217, 67, 217, 147);
 		frame.getContentPane().add(btn2Players);
-		
+
 		btn1Player.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //On 1 Player Selection
 				//The user has decided to play solo against the AI (TO DO: ADD AI)
@@ -678,10 +753,10 @@ public class Main {
 				frame.getContentPane().remove(btn2Players); 
 				frame.revalidate();
 				frame.repaint();
-				
+
 				currentPlayer = 1;
-				
-				
+
+
 				JButton topleft = new JButton("");
 				topleft.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -691,12 +766,17 @@ public class Main {
 							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
-							topleftV = 'o';
-						} else if (currentPlayer == 2 && topleftV != 'o') {
+							topleftV = 'X';
+							topleft.setForeground(Color.blue);
+							turnCount++;
+						} else if (currentPlayer == 2 && topleftV != 'X') {
 							topleft.setText("O");
 							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
+							topleftV = 'O';
+							topleft.setForeground(Color.red);
+							turnCount++;
 						}
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
@@ -733,13 +813,13 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
 				topleft.setBounds(77, 32, 140, 140);
 				frame.getContentPane().add(topleft);
-				
+
 				JButton topmid = new JButton("");
 				topmid.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -749,12 +829,15 @@ public class Main {
 							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
-							topmidV = 'o';
-						} else if (currentPlayer == 2 && topmidV != 'o') {
+							topmidV = 'X';
+							topmid.setForeground(Color.blue);
+						} else if (currentPlayer == 2 && topmidV != 'X') {
 							topleft.setText("O");
 							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
+							topmidV = 'O';
+							topmid.setForeground(Color.red);
 						}
 						if (topleftV == 'X' && topmidV == 'X' && toprightV == 'X' 
 								|| midleftV == 'X' && midmidV == 'X' &&  midrightV == 'X' 
@@ -791,13 +874,13 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
 				topmid.setBounds(227, 32, 140, 140);
 				frame.getContentPane().add(topmid);
-				
+
 				JButton topright = new JButton("");
 				topright.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -807,8 +890,8 @@ public class Main {
 							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
 							frame.repaint();
-							toprightV = 'o';
-						} else if (currentPlayer == 2 && toprightV != 'o') {
+							toprightV = 'X';
+						} else if (currentPlayer == 2 && toprightV != 'X') {
 							topleft.setText("O");
 							topleft.setFont(new Font("Comic Sans", Font.PLAIN, 100));
 							frame.revalidate();
@@ -849,13 +932,13 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
 				topright.setBounds(377, 33, 140, 140);
 				frame.getContentPane().add(topright);
-				
+
 				JButton midright = new JButton("");
 				midright.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -907,15 +990,15 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
 				midright.setBounds(377, 184, 140, 140);
 				frame.getContentPane().add(midright);
-				
-                JButton midmid = new JButton("");
-                midmid.addActionListener(new ActionListener() {
+
+				JButton midmid = new JButton("");
+				midmid.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
@@ -965,13 +1048,13 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
-		        midmid.setBounds(227, 184, 140, 140);
+				midmid.setBounds(227, 184, 140, 140);
 				frame.getContentPane().add(midmid);
-				
+
 				JButton midleft = new JButton("");
 				midleft.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -1023,15 +1106,15 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
 				midleft.setBounds(77, 184, 140, 140);
 				frame.getContentPane().add(midleft);
-				
-     			JButton botleft = new JButton("");
-     			botleft.addActionListener(new ActionListener() {
+
+				JButton botleft = new JButton("");
+				botleft.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (currentPlayer == 1) {
 							currentPlayer = 2;
@@ -1081,13 +1164,13 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
 				botleft.setBounds(77, 335, 140, 140);
 				frame.getContentPane().add(botleft);
-				
+
 				JButton botmid = new JButton("");
 				botmid.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -1139,13 +1222,13 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
 				botmid.setBounds(227, 335, 140, 140);
 				frame.getContentPane().add(botmid);
-				
+
 				JButton botright = new JButton("");
 				botright.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -1197,22 +1280,22 @@ public class Main {
 							}						
 							frame.removeAll();
 						}
-						
-						
+
+
 					}
 				});
-                botright.setBounds(377, 335, 140, 140);
+				botright.setBounds(377, 335, 140, 140);
 				frame.getContentPane().add(botright);
-				
-				
-				
+
+
+
 			}
 		});
 		btn1Player.setBounds(0, 67, 217, 147);
 		frame.getContentPane().add(btn1Player);
-		
 
-		}
-		
-		
+
 	}
+
+
+}
