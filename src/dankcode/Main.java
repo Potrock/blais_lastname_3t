@@ -69,16 +69,16 @@ public class Main {
 
   JLabel playerOption = new JLabel("How many players?");
   playerOption.setFont(new Font("Tahoma", Font.PLAIN, 57));
-  playerOption.setBounds(49, 11, 500, 79);
+  playerOption.setBounds(51, 81, 500, 79);
   frame.getContentPane().add(playerOption);
 	JButton btn1Player = new JButton("1 player");
 	btn1Player.setFont(new Font("Tahoma", Font.PLAIN, 15));
-	btn1Player.setBounds(49, 101, 224, 342);
+	btn1Player.setBounds(49, 243, 224, 342);
 	frame.getContentPane().add(btn1Player);
 
 	JButton btn2Players = new JButton("2 players");
 	btn2Players.setFont(new Font("Tahoma", Font.PLAIN, 15));
-	btn2Players.setBounds(307, 101, 224, 342);
+	btn2Players.setBounds(312, 243, 224, 342);
 	frame.getContentPane().add(btn2Players);
 	
 	btn1Player.addActionListener(new ActionListener() {
@@ -6246,7 +6246,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
@@ -6322,7 +6322,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
@@ -6395,7 +6395,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
@@ -6468,7 +6468,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
@@ -6541,7 +6541,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
@@ -6614,7 +6614,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
@@ -6687,7 +6687,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
@@ -6760,7 +6760,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
@@ -6835,7 +6835,7 @@ public class Main {
 									frame.getContentPane().remove(lblp2turn);
 									lbltie.setText("Tie Game!");
 									lbltie.setFont(new Font("Tahoma", Font.PLAIN, 36));
-									lbltie.setBounds(20, 67, 500, 60);
+									lbltie.setBounds(180, 50, 500, 60);
 									frame.getContentPane().add(lbltie);
 									frame.revalidate();
 									frame.repaint();
