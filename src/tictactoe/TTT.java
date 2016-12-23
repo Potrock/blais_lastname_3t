@@ -2,7 +2,6 @@ package tictactoe;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -10,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 
 public class TTT {
@@ -18,10 +16,10 @@ public class TTT {
 	/**
 	 * Patrick and Dylan's Tic Tac Toe
 	 * 
-	 * A button was made for each of the 9 squares in tic tac toe
+	 * A button was made for each of the 9 squares in tic tac toe.
 	 * Every time you click one, it checks to see who you are playing as, and based on that will either set the text to your character, or will do nothing if it's already been set.
 	 * After 5 turns, it begins to check for winners.
-	 * It notifies you whos turn it is in the title of the window.
+	 * It notifies you who's turn it is in the title of the window.
 	 */
 
     static char topLeftV, topMidV, topRightV, midLeftV, midMidV, midRightV, botLeftV, botMidV, botRightV; //Setting up the values used to check for winners, and to prevent overriding the buttons.
@@ -69,13 +67,15 @@ public class TTT {
         frame.getContentPane().setLayout(null);
         frame.setTitle("Tic Tac Toe - Menu");
         frame.getContentPane().setLayout(null);
-
+        
+        //New label for opening scene/
         JLabel playerOption = new JLabel("Welcome to Patrick and Dylan's Tic Tac Toe");
         playerOption.setForeground(Color.RED);
         playerOption.setFont(new Font("Tahoma", Font.PLAIN, 25));
         playerOption.setBounds(44, 81, 500, 79);
         frame.getContentPane().add(playerOption);
-
+        
+        //Start button to start game
         JButton start = new JButton("Start!");
         start.setFont(new Font("Tahoma", Font.BOLD, 25));
         start.setForeground(Color.BLUE);
@@ -91,15 +91,14 @@ public class TTT {
          */
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.getContentPane().setLayout(new GridLayout(3, 3));
-                frame.getContentPane().remove(playerOption);
+                frame.getContentPane().setLayout(new GridLayout(3, 3));//Sets the layout for the game
+                frame.getContentPane().remove(playerOption);//Removes the buttons
                 frame.getContentPane().remove(start);
-                frame.setTitle("Tic Tac Toe - 2 Player Game");
+                frame.setTitle("Tic Tac Toe - 2 Player Game");//Sets new title
                 frame.revalidate();
-                frame.repaint();
+                frame.repaint();//Housekeeping
                 
                 frame.setTitle("Tic Tac Toe - It is X's turn!"); //Starts the game on X's turn
-
 
                 /**
                  * Button Setup
